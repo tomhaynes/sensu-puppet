@@ -29,12 +29,12 @@ describe 'sensu' do
 
     context 'setting version' do
       let(:params) { {
-        :version              => '0.9.10',
+        :version              => '0.27.0.el7',
         :sensu_plugin_version => 'installed',
       } }
 
       it { should contain_package('sensu').with(
-        :ensure => '0.9.10'
+        :ensure => '0.27.0.el7'
       ) }
 
       it { should contain_package('sensu-plugin').with(
@@ -60,7 +60,7 @@ describe 'sensu' do
       it { should contain_file('/etc/default/sensu').with(:content => /RUBYOPT="a"/) }
       it { should contain_file('/etc/default/sensu').with(:content => /GEM_PATH="\/foo"/) }
       it { should contain_file('/etc/default/sensu').with(:content => /CLIENT_DEREGISTER_ON_STOP=true/) }
-      it { should contain_file('/etc/default/sensu').with(:content => /CLIENT_DEREGISTER_HANDLER="example"/) } 
+      it { should contain_file('/etc/default/sensu').with(:content => /CLIENT_DEREGISTER_HANDLER="example"/) }
     end
 
     context 'repos' do
@@ -139,7 +139,7 @@ describe 'sensu' do
         context 'default' do
           it { should contain_yumrepo('sensu').with(
             :enabled   => 1,
-            :baseurl   => 'http://repositories.sensuapp.org/yum/$basearch/',
+            :baseurl   => 'http://repositories.sensuapp.org/yum/7/$basearch/',
             :gpgcheck  => 0,
             :before    => 'Package[sensu]'
           ) }
